@@ -22,10 +22,22 @@ const PORT = process.env.PORT || 5000;
 // ─────────────────────────────────────────────────────────
 
 // CORS — allow the React dev server to send cookies cross-origin
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  "http://localhost:3000",
+  "https://smart-personalized-learning-ai.vercel.app",
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
-    credentials: true, // required for HTTP-only cookies
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
 
