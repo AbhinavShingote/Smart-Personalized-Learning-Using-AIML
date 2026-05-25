@@ -1,7 +1,7 @@
 // src/components/StudyChatbot.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Sparkles, User, Bot, HelpCircle } from "lucide-react";
+import { X, Send, Sparkles, User, Bot, HelpCircle } from "lucide-react";
 import { useLearning } from "../contexts/LearningContext";
 
 export default function StudyChatbot() {

@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, CheckCircle, Clock, Play, BookOpen, Download, Award, LogOut } from 'lucide-react';
 import { generateCompleteRoadmap } from '../services/mainService';
-import { generateCategoryRoadmap } from '../services/categoryService';
 import { generateQuiz } from '../services/quizGenerator';
 import { exportRoadmapToPDF, exportProgressReport } from '../utils/exportUtils';
 

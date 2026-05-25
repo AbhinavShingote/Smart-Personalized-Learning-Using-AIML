@@ -252,19 +252,7 @@ const getDifficultyProgression = (day, totalDays, skillLevel) => {
   }
 };
 
-const generateTopicForPhase = (courseName, phase, topicNumber, difficulty, duration) => {
-  const courseType = detectCourseType(courseName);
-  const phaseTopics = getPhaseTopics(courseType, phase, courseName);
-  const selectedTopic = phaseTopics[topicNumber % phaseTopics.length];
-  
-  return {
-    title: selectedTopic.title.replace('{course}', courseName),
-    description: selectedTopic.description.replace('{course}', courseName),
-    duration: `${Math.ceil(duration)} hours`,
-    difficulty,
-    category: selectedTopic.category
-  };
-};
+// generateTopicForPhase removed - unused
 
 const detectCourseType = (courseName) => {
   const name = courseName.toLowerCase();

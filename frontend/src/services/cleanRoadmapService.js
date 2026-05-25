@@ -103,51 +103,6 @@ async function getTopicsForCourse(courseName) {
   return generateIntelligentTopics(courseName);
 }
 
-async function generateAITopics(courseName) {
-  try {
-    // Dynamic import to avoid build issues
-    const OpenAI = (await import('openai')).default;
-    const openai = new OpenAI({
-      apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-      dangerouslyAllowBrowser: true
-    });
-
-    const prompt = `Create 18 specific, actionable learning topics for a course called "${courseName}".
-
-Requirements:
-- Each topic should be specific and actionable (not generic like "basics" or "overview")
-- Topics should progress from beginner to advanced
-- Include practical, hands-on topics
-- Make topics relevant to real-world applications
-- Avoid repetitive or vague titles
-
-Return ONLY a JSON array of topic titles:
-["Specific Topic 1", "Specific Topic 2", ...]`;
-
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.7,
-      max_tokens: 1000
-    });
-
-    const content = response.choices[0].message.content.trim();
-    const cleanContent = content.replace(/```json\n?|```\n?/g, '').trim();
-    
-    const topics = JSON.parse(cleanContent);
-    
-    if (Array.isArray(topics) && topics.length > 0) {
-      console.log(`✅ OpenAI generated ${topics.length} topics for ${courseName}`);
-      return topics;
-    }
-    
-    throw new Error('Invalid AI response format');
-    
-  } catch (error) {
-    console.error('OpenAI API error:', error);
-    throw error;
-  }
-}
 
 function generateIntelligentTopics(courseName) {
   const input = courseName.toLowerCase();
@@ -244,7 +199,6 @@ function analyzeCourseType(input) {
 }
 
 function generateBlockchainTopics(courseName) {
-  const name = courseName.trim();
   return [
     `Blockchain Basics and Terminology`,
     `Distributed Ledgers and Consensus Mechanisms`,

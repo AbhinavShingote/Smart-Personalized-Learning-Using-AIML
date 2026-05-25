@@ -1,6 +1,6 @@
 // src/pages/ResetPasswordPage.jsx
 import React, { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { resetPassword } from "../services/authService";
 

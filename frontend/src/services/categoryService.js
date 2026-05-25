@@ -242,39 +242,4 @@ const createCategoryPrompt = (courseType, courseInfo, days, skillLevel, studyHou
   }
 };
 
-const addVideosToRoadmap = async (roadmap, courseName) => {
-  const enhancedRoadmap = [];
-  
-  for (const day of roadmap) {
-    const enhancedTopics = [];
-    
-    for (const topic of day.topics) {
-      try {
-        const searchQuery = `${courseName} ${topic.title}`;
-        const videos = await searchVideos(searchQuery, 2);
-        
-        enhancedTopics.push({
-          ...topic,
-          id: topic.id || `${day.day}_${enhancedTopics.length + 1}`,
-          videos,
-          completed: false
-        });
-      } catch (error) {
-        console.log(`Video search failed for topic: ${topic.title}`);
-        enhancedTopics.push({
-          ...topic,
-          id: topic.id || `${day.day}_${enhancedTopics.length + 1}`,
-          videos: [],
-          completed: false
-        });
-      }
-    }
-    
-    enhancedRoadmap.push({
-      ...day,
-      topics: enhancedTopics
-    });
-  }
-  
-  return enhancedRoadmap;
-};
+// addVideosToRoadmap removed - unused

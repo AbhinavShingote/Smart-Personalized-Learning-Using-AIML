@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, BookOpen, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, CheckCircle } from 'lucide-react';
 
 const SimpleRoadmapView = ({ roadmap, onTopicComplete }) => {
   if (!roadmap || !roadmap.roadmap) {

@@ -8,7 +8,7 @@ const QuizModal = ({ topic, onClose, onComplete }) => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
-  const { quizzes, dispatch } = useLearning();
+  const { quizzes } = useLearning();
 
   const quiz = quizzes[topic.id];
   
