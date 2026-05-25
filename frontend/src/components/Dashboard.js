@@ -187,7 +187,7 @@ const Dashboard = () => {
             dispatch({ type: 'SET_ROADMAP', payload: basicFallback });
           }
         }
-      }, 8000);
+      }, 20000);
       
       return () => {
         clearInterval(timer);
@@ -256,7 +256,7 @@ const Dashboard = () => {
           
           // Add timeout to prevent infinite loading
           const timeoutPromise = new Promise((_, reject) => 
-            setTimeout(() => reject(new Error('Roadmap generation timed out')), 15000)
+            setTimeout(() => reject(new Error('Roadmap generation timed out')), 25000)
           );
           
           let roadmapPromise;
@@ -391,7 +391,7 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    const timeLeft = Math.max(0, 8 - loadingTime);
+    const timeLeft = Math.max(0, 20 - loadingTime);
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
