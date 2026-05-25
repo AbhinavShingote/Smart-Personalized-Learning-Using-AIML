@@ -32,7 +32,7 @@ Example output format:
     const topics = await executeWithKeyRotation(async (apiKey) => {
       const model = new ChatGoogleGenerativeAI({
         apiKey,
-        model: "gemini-2.5-flash",
+        model: "gemini-flash-latest",
         temperature: 0.7,
         maxRetries: 0,
       });
@@ -377,7 +377,7 @@ Requirements:
     const cheatSheet = await executeWithKeyRotation(async (apiKey) => {
       const model = new ChatGoogleGenerativeAI({
         apiKey,
-        model: "gemini-2.5-flash",
+        model: "gemini-flash-latest",
         temperature: 0.7,
         maxRetries: 0,
       });
