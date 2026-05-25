@@ -65,16 +65,31 @@ Guidelines:
 
     console.log(`💬 [CHATBOT] Generating response for user question...`);
     
-    const reply = await executeWithKeyRotation(async (apiKey) => {
-      const model = new ChatGoogleGenerativeAI({
-        apiKey,
-        model: "gemini-2.5-flash",
-        temperature: 0.7,
-        maxRetries: 0,
+    let reply;
+    try {
+      reply = await executeWithKeyRotation(async (apiKey) => {
+        const model = new ChatGoogleGenerativeAI({
+          apiKey,
+          model: "gemini-2.5-flash",
+          temperature: 0.7,
+          maxRetries: 0,
+        });
+        const response = await model.invoke(messages);
+        return response.content;
       });
-      const response = await model.invoke(messages);
-      return response.content;
-    });
+    } catch (primaryErr) {
+      console.warn("⚠️ [CHATBOT] Primary model gemini-2.5-flash failed or exhausted. Falling back to gemini-flash-latest...");
+      reply = await executeWithKeyRotation(async (apiKey) => {
+        const model = new ChatGoogleGenerativeAI({
+          apiKey,
+          model: "gemini-flash-latest",
+          temperature: 0.7,
+          maxRetries: 0,
+        });
+        const response = await model.invoke(messages);
+        return response.content;
+      });
+    }
 
     // 2. Save bot's reply to the database
     await prisma.chatMessage.create({

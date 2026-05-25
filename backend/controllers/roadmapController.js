@@ -29,25 +29,47 @@ Example output format:
 
     console.log(`🤖 [GEMINI] Generating topics for: "${courseName}"...`);
     
-    const topics = await executeWithKeyRotation(async (apiKey) => {
-      const model = new ChatGoogleGenerativeAI({
-        apiKey,
-        model: "gemini-2.5-flash",
-        temperature: 0.7,
-        maxRetries: 0,
-      });
-      const response = await model.invoke(prompt);
-      
-      let content = response.content.trim();
-      // Strip markdown formatting if the model returned it anyway
-      content = content.replace(/```json\n?|```\n?/g, '').trim();
+    let topics;
+    try {
+      topics = await executeWithKeyRotation(async (apiKey) => {
+        const model = new ChatGoogleGenerativeAI({
+          apiKey,
+          model: "gemini-2.5-flash",
+          temperature: 0.7,
+          maxRetries: 0,
+        });
+        const response = await model.invoke(prompt);
+        
+        let content = response.content.trim();
+        content = content.replace(/```json\n?|```\n?/g, '').trim();
 
-      const parsed = JSON.parse(content);
-      if (!Array.isArray(parsed) || parsed.length === 0) {
-        throw new Error("Invalid output format: Expected a non-empty array of strings.");
-      }
-      return parsed;
-    });
+        const parsed = JSON.parse(content);
+        if (!Array.isArray(parsed) || parsed.length === 0) {
+          throw new Error("Invalid output format: Expected a non-empty array of strings.");
+        }
+        return parsed;
+      });
+    } catch (primaryErr) {
+      console.warn("⚠️ [GEMINI] Primary model gemini-2.5-flash failed or exhausted. Falling back to gemini-flash-latest...");
+      topics = await executeWithKeyRotation(async (apiKey) => {
+        const model = new ChatGoogleGenerativeAI({
+          apiKey,
+          model: "gemini-flash-latest",
+          temperature: 0.7,
+          maxRetries: 0,
+        });
+        const response = await model.invoke(prompt);
+        
+        let content = response.content.trim();
+        content = content.replace(/```json\n?|```\n?/g, '').trim();
+
+        const parsed = JSON.parse(content);
+        if (!Array.isArray(parsed) || parsed.length === 0) {
+          throw new Error("Invalid output format: Expected a non-empty array of strings.");
+        }
+        return parsed;
+      });
+    }
 
     console.log(`✅ [GEMINI] Successfully generated ${topics.length} topics for: "${courseName}"`);
     return res.json({ success: true, topics });
@@ -374,16 +396,31 @@ Requirements:
 
     console.log(`🤖 [GEMINI] Generating cheat sheet for: "${topicTitle}"...`);
     
-    const cheatSheet = await executeWithKeyRotation(async (apiKey) => {
-      const model = new ChatGoogleGenerativeAI({
-        apiKey,
-        model: "gemini-2.5-flash",
-        temperature: 0.7,
-        maxRetries: 0,
+    let cheatSheet;
+    try {
+      cheatSheet = await executeWithKeyRotation(async (apiKey) => {
+        const model = new ChatGoogleGenerativeAI({
+          apiKey,
+          model: "gemini-2.5-flash",
+          temperature: 0.7,
+          maxRetries: 0,
+        });
+        const response = await model.invoke(prompt);
+        return response.content;
       });
-      const response = await model.invoke(prompt);
-      return response.content;
-    });
+    } catch (primaryErr) {
+      console.warn("⚠️ [GEMINI] Primary model gemini-2.5-flash failed or exhausted. Falling back to gemini-flash-latest...");
+      cheatSheet = await executeWithKeyRotation(async (apiKey) => {
+        const model = new ChatGoogleGenerativeAI({
+          apiKey,
+          model: "gemini-flash-latest",
+          temperature: 0.7,
+          maxRetries: 0,
+        });
+        const response = await model.invoke(prompt);
+        return response.content;
+      });
+    }
 
     console.log(`✅ [GEMINI] Successfully generated cheat sheet for: "${topicTitle}"`);
     return res.json({ success: true, cheatSheet });
