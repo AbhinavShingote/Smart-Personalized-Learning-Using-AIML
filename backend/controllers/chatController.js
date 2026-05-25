@@ -68,7 +68,7 @@ Guidelines:
     const reply = await executeWithKeyRotation(async (apiKey) => {
       const model = new ChatGoogleGenerativeAI({
         apiKey,
-        model: "gemini-flash-latest",
+        model: "gemini-2.5-flash",
         temperature: 0.7,
         maxRetries: 0,
       });
