@@ -3,7 +3,7 @@
 // All requests go with credentials: "include" so the browser sends/receives
 // the HTTP-only JWT cookie automatically.
 
-const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
 
 async function handleResponse(res) {
   const data = await res.json();

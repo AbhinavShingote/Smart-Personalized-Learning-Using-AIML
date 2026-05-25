@@ -29,7 +29,7 @@ export default function CheatSheetModal({ topic, courseName, isOpen, onClose }) 
     setCopied(false);
 
     try {
-      const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
       const res = await fetch(`${API_BASE}/roadmap/cheat-sheet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

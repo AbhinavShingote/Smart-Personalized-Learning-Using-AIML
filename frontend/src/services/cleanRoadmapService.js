@@ -79,7 +79,7 @@ async function getTopicsForCourse(courseName) {
   
   // Attempt to use Google Gemini AI from the backend first
   try {
-    const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+    const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
     console.log(`🧠 Querying Gemini API on backend for: "${courseName}"`);
     const res = await fetch(`${API_BASE}/roadmap/generate`, {
       method: "POST",

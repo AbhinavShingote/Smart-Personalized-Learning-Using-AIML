@@ -37,7 +37,7 @@ const Dashboard = () => {
 
   const fetchLeaderboard = async () => {
     try {
-      const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
       const res = await fetch(`${API_BASE}/auth/leaderboard`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ const Dashboard = () => {
 
   const fetchAchievements = async () => {
     try {
-      const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
       const res = await fetch(`${API_BASE}/auth/achievements`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -75,7 +75,7 @@ const Dashboard = () => {
 
   const syncXPWithBackend = async (xpGained, streakValue = undefined) => {
     try {
-      const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
       const res = await fetch(`${API_BASE}/auth/update-xp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

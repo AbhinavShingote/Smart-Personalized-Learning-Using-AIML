@@ -34,7 +34,7 @@ export default function StudyChatbot() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+        const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
         const res = await fetch(`${API_BASE}/chat/history`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -85,7 +85,7 @@ export default function StudyChatbot() {
     setLoading(true);
 
     try {
-      const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const API_BASE = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
       
       // Prepare history to send to backend (excluding welcome message)
       const chatHistory = messages

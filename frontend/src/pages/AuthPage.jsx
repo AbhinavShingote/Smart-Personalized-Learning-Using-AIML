@@ -335,7 +335,7 @@ function RegisterForm({ onSwitch }) {
 
 function GoogleButton() {
   const handleGoogleLogin = () => {
-    const apiBase = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+    const apiBase = process.env.REACT_APP_API_URL || "https://smart-personalized-learning-using-aiml-1.onrender.com/api";
     window.location.href = `${apiBase}/auth/google`;
   };
 
