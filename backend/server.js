@@ -21,6 +21,8 @@ const PORT = process.env.PORT || 5000;
 //  Global Middleware
 // ─────────────────────────────────────────────────────────
 
+app.set("trust proxy", 1); // Trust first proxy (Render/Railway)
+
 // CORS — allow the React dev server to send cookies cross-origin
 const allowedOrigins = [
   process.env.CLIENT_URL,
