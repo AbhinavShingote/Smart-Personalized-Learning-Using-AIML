@@ -30,21 +30,30 @@ const allowedOrigins = [
   "https://smart-personalized-learning-ai.vercel.app",
 ].filter(Boolean);
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Completely strip any newlines, carriage returns, or hidden whitespace
-      const cleanOrigin = origin ? origin.replace(/[\r\n]+/g, "").trim() : "*";
-      
-      if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
-        callback(null, cleanOrigin);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+// Custom CORS middleware to avoid any header parsing bugs
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  
+  // Clean the origin to guarantee no invalid characters
+  const cleanOrigin = origin ? origin.replace(/[^\x20-\x7E]/g, '') : '*';
+  
+  if (!origin || allowedOrigins.includes(cleanOrigin) || cleanOrigin.endsWith(".vercel.app")) {
+    res.setHeader('Access-Control-Allow-Origin', cleanOrigin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+    
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(204);
+    }
+    next();
+  } else {
+    // If blocked, immediately throw the error
+    const err = new Error("Not allowed by CORS");
+    err.status = 403;
+    next(err);
+  }
+});
 
 app.use(express.json());           // parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
