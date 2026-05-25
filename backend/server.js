@@ -33,9 +33,11 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Completely strip any newlines, carriage returns, or hidden whitespace
+      const cleanOrigin = origin ? origin.replace(/[\r\n]+/g, "").trim() : "*";
+      
       if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
-        // Pass the exact origin string instead of `true` to prevent header formatting errors
-        callback(null, origin || "*");
+        callback(null, cleanOrigin);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
