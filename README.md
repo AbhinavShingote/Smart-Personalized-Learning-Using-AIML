@@ -1,161 +1,68 @@
-# AI Learning Roadmap Application
+# Smart Personalized Learning Using AI/ML
 
-A modern, interactive, and responsive React.js frontend for an AI-based learning roadmap application. This application helps users create personalized learning paths with video recommendations, interactive quizzes, and progress tracking.
+This repository contains the complete implementation of the **Smart Personalized AI Learning Platform**. The project is split into a React frontend and a Node.js Express backend.
 
-## Features
+## 📂 Project Structure
 
-### 🎯 Core Functionality
-- **Personalized Learning Roadmaps**: Generate custom learning paths based on course name and duration
-- **Daily Topic Organization**: Structured daily learning with color-coded milestones
-- **Video Recommendations**: Curated YouTube videos for each topic with thumbnails and duration
-- **Interactive Quizzes**: Multiple-choice quizzes with immediate feedback
-- **Progress Tracking**: Real-time progress visualization with charts and statistics
+- **`frontend/`**: React SPA frontend built with React 18, Tailwind CSS, Framer Motion, and Chart.js.
+- **`backend/`**: Node.js Express backend API interacting with PostgreSQL via Prisma ORM. Integrated with Google OAuth, YouTube Data API v3, LangChain/Gemini key-rotation helper, and Nodemailer SMTP streak triggers.
+- **`files/`**: Backup configuration files and legacy authentication schemas.
+- **`package.json`**: Root-level orchestration settings to run both development environments concurrently.
 
-### 🎨 Design Features
-- **Modern UI/UX**: Clean, glass-morphism design with smooth animations
-- **Fully Responsive**: Works seamlessly on desktop, tablet, and mobile devices
-- **Interactive Elements**: Hover effects, smooth transitions, and engaging animations
-- **Color-coded Progress**: Visual indicators for completed topics and days
-- **Beautiful Charts**: Progress visualization using Chart.js with doughnut and bar charts
-
-### 🚀 Technical Features
-- **React.js**: Modern React with hooks and functional components
-- **React Router**: Client-side routing for seamless navigation
-- **Framer Motion**: Smooth animations and transitions
-- **Tailwind CSS**: Utility-first CSS framework for responsive design
-- **Chart.js**: Interactive charts for progress visualization
-- **Lucide React**: Beautiful, customizable icons
-
-## Installation & Setup
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (version 14 or higher)
+
+- Node.js (version 18 or higher recommended)
 - npm or yarn package manager
+- PostgreSQL database instance
+- Google Cloud Console Credentials (for OAuth and YouTube API v3)
+- Gemini API Keys (minimum 1, supports up to 5 for auto-rotation)
 
-### Installation Steps
+### 📦 Setup & Installation
 
-1. **Clone or download the project**
-   ```bash
-   cd SMART
-   ```
+From the root directory, run the following command to automatically install all dependencies across the workspace (root, frontend, and backend):
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
-
-4. **Open your browser**
-   Navigate to `http://localhost:3000` to view the application
-
-## Project Structure
-
-```
-src/
-├── components/
-│   ├── LandingPage.js      # Landing page with course input form
-│   ├── Dashboard.js        # Main dashboard with roadmap and progress
-│   ├── VideoCard.js        # Video recommendation cards
-│   ├── QuizModal.js        # Interactive quiz modal
-│   └── ProgressChart.js    # Progress visualization charts
-├── data/
-│   └── mockData.js         # Mock data for topics, videos, and quizzes
-├── App.js                  # Main app component with routing
-├── index.js               # React app entry point
-└── index.css              # Global styles and Tailwind imports
+```bash
+npm run install:all
 ```
 
-## Usage Guide
+### ⚙️ Environment Configuration
 
-### 1. Landing Page
-- Enter a course name (e.g., "React Development")
-- Select learning duration (7, 14, 21, or 30 days)
-- Click "Generate Roadmap" to create your learning path
+Configure environmental keys separately for frontend and backend:
 
-### 2. Dashboard
-- **Day Selection**: Click on day buttons to navigate between learning days
-- **Topic Management**: View topics for each day with descriptions and difficulty levels
-- **Video Learning**: Click on video cards to open YouTube videos in new tabs
-- **Quiz Taking**: Click "Quiz" button on any topic to test your knowledge
-- **Progress Tracking**: Monitor your completion percentage and learning streak
-
-### 3. Interactive Features
-- **Topic Completion**: Mark topics as complete to track progress
-- **Day Completion**: Complete entire days to build learning streaks
-- **Quiz System**: Take quizzes with immediate feedback and score tracking
-- **Progress Visualization**: View detailed charts showing your learning progress
-
-## Mock Data
-
-The application uses mock data for demonstration purposes:
-
-- **5 Sample Topics**: Covering React fundamentals, state management, lifecycle, routing, and API integration
-- **5 Video Recommendations**: Curated YouTube videos with thumbnails and durations
-- **5 Quiz Sets**: Multiple-choice questions for each topic with correct answers
-
-## Customization
-
-### Adding New Topics
-Edit `src/data/mockData.js` to add new topics, videos, and quizzes:
-
-```javascript
-export const mockTopics = [
-  {
-    id: 6,
-    title: "Your New Topic",
-    description: "Topic description",
-    duration: "2 hours",
-    difficulty: "Beginner",
-    category: "Your Category"
-  }
-  // ... existing topics
-];
+#### Frontend Config (`frontend/.env`)
+Create a `frontend/.env` file with reference to `frontend/.env.example`:
+```env
+REACT_APP_YOUTUBE_API_KEY=your_youtube_api_key_here
+REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
+REACT_APP_API_URL=http://localhost:5000/api
 ```
 
-### Styling Customization
-- Modify `tailwind.config.js` for color schemes and animations
-- Update `src/index.css` for global styles and custom classes
-- Customize component styles using Tailwind utility classes
+#### Backend Config (`backend/.env`)
+Create a `backend/.env` file with reference to `backend/.env.example`:
+```env
+DATABASE_URL="postgresql://user:pass@localhost:5432/smart_learning"
+JWT_SECRET="your_jwt_secret_key"
+PORT=5000
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT=587
+SMTP_USER="your-email@gmail.com"
+SMTP_PASS="your-app-password"
+```
 
-## Browser Support
+### 🏃 Running the Application
 
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
+You can start both the frontend development server and backend API concurrently using:
 
-## Performance Features
+```bash
+npm run dev
+```
 
-- **Lazy Loading**: Components load efficiently
-- **Optimized Animations**: Smooth 60fps animations with Framer Motion
-- **Responsive Images**: Optimized video thumbnails
-- **Efficient State Management**: Local state management for optimal performance
+- **Frontend client** runs at `http://localhost:3000`
+- **Backend server API** runs at `http://localhost:5000`
 
-## Future Enhancements
-
-- Backend integration for persistent data
-- User authentication and profiles
-- Social features (sharing progress, leaderboards)
-- Advanced analytics and insights
-- Offline support with service workers
-- Mobile app version
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-This project is open source and available under the MIT License.
-
----
-
-**Built with ❤️ using React.js, Tailwind CSS, and Framer Motion**
+Individual commands:
+- Start Frontend only: `npm run start:frontend`
+- Start Backend Node server only: `npm run start:backend`
+- Start Backend Nodemon server only: `npm run dev:backend`
