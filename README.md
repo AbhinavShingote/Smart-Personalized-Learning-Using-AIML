@@ -138,12 +138,29 @@ Navigate your browser to `http://localhost:3000`.
 
 ## 📸 Screenshots
 
-*Add screenshots here to show the landing page, roadmaps, interactive quizzes, chat panels, and gamified achievements.*
+### 🔑 Authentication Flow
+| Sign In | Sign Up | Forgot Password | Reset Password Email |
+| :---: | :---: | :---: | :---: |
+| ![Sign In](screenshots/Sign_in_page.png) | ![Sign Up](screenshots/sign_up_page.png) | ![Forgot Password](screenshots/forgot_pass.png) | ![Reset Password Email](screenshots/reset_pass_mail.png) |
 
-| Dashboard | AI Roadmap | Persistent Chatbot |
+### 🎯 Learning Dashboard & Roadmaps
+| Dashboard | Leaderboard | Topic Selection |
 | :---: | :---: | :---: |
-| *[Dashboard View]* | *[Roadmap Layout]* | *[Tutor Chat Panel]* |
-| `screenshots/dashboard.png` | `screenshots/roadmap.png` | `screenshots/chat.png` |
+| ![Dashboard](screenshots/Dashboard.png) | ![Leaderboard](screenshots/leaderboard.png) | ![Topic Selection](screenshots/New_roadmap_Sub_cat.png) |
+
+| Preferences | Topics List | Detailed Roadmap |
+| :---: | :---: | :---: |
+| ![Preferences](screenshots/New_roadmap_preference.png) | ![Topics List](screenshots/New_roadmap_topics.png) | ![Detailed Roadmap](screenshots/roadmap.png) |
+
+### 💬 Study Tools
+| Persistent Chatbot | Cheat Notes | YouTube Recommendations |
+| :---: | :---: | :---: |
+| ![Persistent Chatbot](screenshots/Study_Buddy_Chatbot.png) | ![Cheat Notes](screenshots/Cheatnotes.png) | ![YouTube Video](screenshots/topics_video.png) |
+
+### ✉️ Schedulers
+| Streak Remainder Email |
+| :---: |
+| ![Streak Email](screenshots/Streak_remainder_mail.png) |
 
 ---
 
